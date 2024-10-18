@@ -1,8 +1,8 @@
 # bible
 
-Read the Word of God from your terminal
+Terminal powered Bible
 
-Forked from [https://github.com/bontibon/bible.git](https://github.com/bontibon/bible.git) but with the Apocrypha added.
+Forked from (https://github.com/LukeSmithxyz/kjv), with the Apocrypha. This uses the Brenton's English Septuagint 2012 Edition for the old testament, And the Byzantine Text for the new testament. These translations are in the public domain.
 
 
 ## Usage
