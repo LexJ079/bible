@@ -203,10 +203,6 @@ cmd == "ref" && mode == "search" && (p["book"] == "" || bookmatches($1, $2, p["b
 	processline()
 }
 
-print "Book: " arr["book"]
-print "Chapter: " arr["chapter"]
-print "Verse: " arr["verse"]
-print "Verse End: " arr["verse_end"]
 
 END {
 	if (cmd == "ref" && outputted_records == 0) {
