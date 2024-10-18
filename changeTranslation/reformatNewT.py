@@ -1,93 +1,73 @@
-# Mapping of book abbreviations to full names and short abbreviations
+# Mapping of book abbreviations to full names, short abbreviations, and book numbers
 book_mapping = {
-    'GEN': ('Genesis', 'Gn'),
-    'EXO': ('Exodus', 'Ex'),
-    'LEV': ('Leveticus', 'Lv'),
-    'NUM': ('Numbers', 'Nm,'),
-    'DEU': ('Deutoronomy', 'Dt'),
-    'JOS': ('Joshua', 'Jos'),
-    'JDG': ('Judges', 'Jdg'),
-    'RUT': ('Ruth', 'Ru'),
-    '1SA': ('1 Kingdoms', '1Kg'),
-    '2SA': ('2 Kingdoms', '2Kg'),
-    '1KI': ('3 Kingdoms', '3Kg'),
-    '2KI': ('4 Kingdoms', '4Kg'),
-    '1CH': ('1 Chronicles', '1Ch'),
-    '2CH': ('2 Chronicles', '2Ch'),
-    '1ES': ('1 Ezra', '1Ez'),
-    'EZR': ('2 Ezra', '2Ez'),
-    'NEH': ('Nehemia', 'Neh'),
-    'TOB': ('Tobit', 'Tb'),
-    'JDT': ('Judith', 'Jdt'),
-    'EST': ('Esther', 'Est'),
-    '1MA': ('1 Maccabees', '1Mc'),
-    '2MA': ('2 Maccabees', '2Mc'),
-    '3MA': ('3 Maccabees', '3Mc'),
-    'PSA': ('Psalms', 'Ps'),
-    'JOB': ('Job', 'Job'),
-    'PRO': ('Proverbs', 'Pr'),
-    'ECC': ('Ecclesiates', 'Ecc'),
-    'SOL': ('Song of Songs', 'SS'),
-    'WIS': ('Wisdom of Solomon', 'WSol'),
-    'SIR': ('Wisdom of Siriach', 'WSir'),
-    'HOS': ('Hosea', 'Hos'),
-    'AMO': ('Amos', 'Am'),
-    'MIC': ('Micah', 'Mic'),
-    'JOE': ('Joel', 'Joel'),
-    'OBA': ('Obadiah', 'Ob'),
-    'JON': ('Jonah', 'Jon'),
-    'NAH': ('Nahum', 'Nah'),
-    'HAB': ('Habakkuk', 'Hab'),
-    'ZEP': ('Zephaniah', 'Zep'),
-    'HAG': ('Haggai', 'Hag'),
-    'ZEC': ('Zecheriah', 'Zec'),
-    'MAL': ('Malachai', 'Mal'),
-    'ISA': ('Isaiah', 'Is'),
-    'JER': ('Jeremiah', 'Jer'),
-    'BAR': ('Baruch', 'Bar'),
-    'LAM': ('Lamentations of Jeremiah', 'Lam'),
-    'EPJ': ('Epistle of Jeremiah', 'EJer'),
-    'EZE': ('Ezekiel', 'Ezk'),
-    'DAN': ('Daniel', 'Dan'),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
-    '': ('', ''),
+    'MAT': ('Matthew', 'Mt', 51),
+    'MAR': ('Mark', 'Mk', 52),
+    'LUK': ('Luke', 'Lk', 53),
+    'JOH': ('John', 'Jn', 54),
+    'ACT': ('Acts', 'Acts', 55),
+    'ROM': ('Romans', 'Rom', 56),
+    '1CO': ('1 Corinthians', '1Co', 57),
+    '2CO': ('2 Corinthians', '2Co', 58),
+    'GAL': ('Galatians', 'Gal', 59),
+    'EPH': ('Ephesians', 'Eph', 60),
+    'PHI': ('Philipians', 'Php', 61),
+    'COL': ('Colossians', 'Col', 62),
+    '1TH': ('1 Thessalonians', '1Th', 63),
+    '2TH': ('2 Thessalonians', '2Th', 64),
+    '1TI': ('1 Timothy', '1Ti', 65),
+    '2TI': ('2 Timothy', '2Ti', 66),
+    'TIT': ('Titus', 'Tts', 67),
+    'PHM': ('Philemon', 'Phm', 68),
+    'HEB': ('Hebrews', 'Heb', 69),
+    'JAM': ('James', 'Jam', 70),
+    '1PE': ('1 Peter', '1Pt', 71),
+    '2PE': ('2 Peter', '2Pt', 72),
+    '1JO': ('1 John', '1Jn', 73),
+    '2JO': ('2 John', '2Jn', 74),
+    '3JO': ('3 John', '3Jn', 75),
+    'JUD': ('Jude', 'Jude', 76),
+    'REV': ('Revelation', 'Rev', 77),
     # Add other books as necessary
 }
 
 def reformat_line(line):
     # Split line into its parts
     parts = line.split(" ", 2)  # Split into book_abbreviation, chapter:verse, and the verse text
+
+    # Check if the line is formatted correctly (has at least 3 parts)
+    if len(parts) < 3:
+        print(f"Skipping malformed line: {line}")
+        return None
+
     book_abbreviation = parts[0]
     chapter_verse = parts[1]
     verse_text = parts[2]
     
+    # Check if chapter_verse contains ':'
+    if ':' not in chapter_verse:
+        print(f"Skipping malformed chapter:verse: {chapter_verse}")
+        return None
+
     # Extract chapter and verse from chapter_verse
     chapter, verse = chapter_verse.split(":")
-    
-    # Get the full book name and abbreviation
-    full_book_name, short_abbreviation = book_mapping[book_abbreviation]
-    
+
+    # Get the full book name, abbreviation, and book number, ensure the book abbreviation exists in the mapping
+    if book_abbreviation not in book_mapping:
+        print(f"Book abbreviation '{book_abbreviation}' not found in mapping.")
+        return None
+
+    full_book_name, short_abbreviation, book_number = book_mapping[book_abbreviation]
+
     # Format the line in the desired output format
-    formatted_line = f"{full_book_name}\t{short_abbreviation}\t{chapter}\t{chapter}\t{verse}\t{verse_text}"
+    formatted_line = f"{full_book_name}\t{short_abbreviation}\t{book_number}\t{chapter}\t{verse}\t{verse_text}"
     return formatted_line
 
 # Read the new translation file and write the reformatted output
-with open('new_translation.txt', 'r') as new_file, open('reformatted_translation.txt', 'w') as old_format_file:
+with open('NewT.txt', 'r') as new_file, open('reformatted_NewTtranslation.txt', 'w') as old_format_file:
     for line in new_file:
         formatted_line = reformat_line(line.strip())
-        old_format_file.write(formatted_line + "\n")
+        if formatted_line:
+            old_format_file.write(formatted_line + "\n")
 
 print("Reformatting complete!")
 
