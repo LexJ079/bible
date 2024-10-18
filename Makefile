@@ -1,24 +1,24 @@
 PREFIX = /usr/local
 
-kjv: kjv.sh kjv.awk kjv.tsv
-	cat kjv.sh > $@
+bible: bible.sh bible.awk bible.tsv
+	cat bible.sh > $@
 	echo 'exit 0' >> $@
 	echo '#EOF' >> $@
-	tar czf - kjv.awk kjv.tsv >> $@
+	tar czf - bible.awk bible.tsv >> $@
 	chmod +x $@
 
-test: kjv.sh
-	shellcheck -s sh kjv.sh
+test: bible.sh
+	shellcheck -s sh bible.sh
 
 clean:
-	rm -f kjv
+	rm -f bible
 
-install: kjv
+install: bible
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f kjv $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/kjv
+	cp -f bible $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/bible
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/kjv
+	rm -f $(DESTDIR)$(PREFIX)/bin/bible
 
 .PHONY: test clean install uninstall

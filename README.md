@@ -1,13 +1,13 @@
-# kjv
+# bible
 
 Read the Word of God from your terminal
 
-Forked from [https://github.com/bontibon/kjv.git](https://github.com/bontibon/kjv.git) but with the Apocrypha added.
+Forked from [https://github.com/bontibon/bible.git](https://github.com/bontibon/bible.git) but with the Apocrypha added.
 
 
 ## Usage
 
-    usage: ./kjv [flags] [reference...]
+    usage: ./bible [flags] [reference...]
 
       -l      list books
       -W      no line wrap
@@ -36,10 +36,10 @@ Forked from [https://github.com/bontibon/kjv.git](https://github.com/bontibon/kj
 
 ## Build
 
-kjv can be built by cloning the repository and then running make:
+bible can be built by cloning the repository and then running make:
 
-    git clone https://github.com/lukesmithxyz/kjv.git
-    cd kjv
+    git clone https://github.com/LexJ079/bible.git
+    cd bible
     sudo make install
 
 ## License

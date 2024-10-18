@@ -1,4 +1,4 @@
-BEGIN {
+bibleBEGIN {
 	#  $1 Book name
 	#  $2 Book abbreviation
 	#  $3 Book number
@@ -8,9 +8,9 @@ BEGIN {
 	FS = "\t"
 
 	MAX_WIDTH = 80
-	if (ENVIRON["KJV_MAX_WIDTH"] ~ /^[0-9]+$/) {
-		if (int(ENVIRON["KJV_MAX_WIDTH"]) < MAX_WIDTH) {
-			MAX_WIDTH = int(ENVIRON["KJV_MAX_WIDTH"])
+	if (ENVIRON["bible_MAX_WIDTH"] ~ /^[0-9]+$/) {
+		if (int(ENVIRON["bible_MAX_WIDTH"]) < MAX_WIDTH) {
+			MAX_WIDTH = int(ENVIRON["bible_MAX_WIDTH"])
 		}
 	}
 
@@ -151,7 +151,7 @@ function bookmatches(book, bookabbr, query) {
 }
 
 function printverse(verse,    word_count, characters_printed) {
-	if (ENVIRON["KJV_NOLINEWRAP"] != "" && ENVIRON["KJV_NOLINEWRAP"] != "0") {
+	if (ENVIRON["bible_NOLINEWRAP"] != "" && ENVIRON["bible_NOLINEWRAP"] != "0") {
 		printf("%s\n", verse)
 		return
 	}
