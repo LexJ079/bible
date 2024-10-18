@@ -1,4 +1,4 @@
-bibleBEGIN {
+BEGIN {
 	#  $1 Book name
 	#  $2 Book abbreviation
 	#  $3 Book number
@@ -202,6 +202,11 @@ cmd == "ref" && mode == "range_ext" && bookmatches($1, $2, p["book"]) && (($4 ==
 cmd == "ref" && mode == "search" && (p["book"] == "" || bookmatches($1, $2, p["book"])) && (p["chapter"] == "" || $4 == p["chapter"]) && match(tolower($6), tolower(p["search"])) {
 	processline()
 }
+
+print "Book: " arr["book"]
+print "Chapter: " arr["chapter"]
+print "Verse: " arr["verse"]
+print "Verse End: " arr["verse_end"]
 
 END {
 	if (cmd == "ref" && outputted_records == 0) {
